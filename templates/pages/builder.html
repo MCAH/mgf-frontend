@@ -1,0 +1,44 @@
+<!-- source: catalog/collection/browse?columns=id,name,private,author_id,canonical -->
+<script type="text/javascript">
+$(function(){
+	$("div#stage").addClass("bigstage");
+	$("div#header").addClass("bigstage");
+	$("div#MapComponent").css("height",($(window).height()-$("div#header").height()-15)+"px");
+	$("div#selector").height($(window).height()-65).css("overflow","auto");
+	$("div#selections").height($(window).height()-65).css("overflow","auto");
+});
+</script>
+<div id="CollectionBuilder" class="component"></div>
+<div id="collection_builder" class="clear">
+ <div id="leftside">
+  <div id="selector">
+   <div class="inner">
+    <h3>Collection Builder</h3>
+    <ul id="collection_select">
+     <?php foreach($model->members() as $collection): ?> <!-- trying to figure this out currently !!!!!!! -->
+      <?php if($collection->get("canonical") != 1 && ($collection->get("private") != 1 || $user->get("id") == $collection->get("author_id"))): ?>
+      <li><a href="collection/{$collection->get('id')}">{ $collection->get('name') }</a></li>
+      <?php endif; ?>
+     <?php endforeach; ?>
+    </ul>
+    <a href="#newCollection">Start a new one</a>
+   </div>
+  </div>
+ </div>
+ <div id="selections">
+  <div class="inner">
+   <input type="text" id="finder"/>
+   <div id="drop">
+    <ul></ul>
+   </div>
+   <a href="#new">Make something new</a>
+   <div id="add"><!-- form goes here --></div>
+   <div id="ListComponent" class="component" rel="this"></div>
+  </div>
+ </div>
+ <div id="map-holder">
+  <div id="MapComponent" class="component" rel="this">
+   <div id="TimelineComponent" class="component" rel="this"></div>
+  </div>
+ </div>
+</div>

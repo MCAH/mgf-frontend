@@ -1,0 +1,84 @@
+/* TimelineComponent */
+
+div.TimelineComponent { height:75px;
+   position:absolute; bottom:0px; left:0px; 
+	background:white; background:rgba(255,255,255,0.7);
+	overflow:hidden;
+	width:100%; }
+
+div.TimelineComponent div.directions {
+   position:absolute;
+   bottom:5px;
+   right:5px;
+   z-index:1000;
+   margin:0 !important;
+   padding:0 !important;
+   font-weight:bold;
+   color:#777;
+}
+	
+div#timeline { position:absolute; left:-1000px; position:relative; }
+div#timeline ul { position:absolute; top:37px; width:10000px; z-index:5;
+	cursor:move; }
+div#timeline li { display:block; }
+div#timeline li a { display:block; background:white; background:none;
+	font-size:.4em; position:relative; margin-top:1px; }
+div#timeline li a span { position:absolute; letter-spacing:155%;
+	display:block; left:15px; top:0px; color:rgba(189,196,232,0.3);
+	font-size:12px; color:rgba(255,255,255,0.7);
+	padding:2px 4px; color:#444; z-index:100;
+	background:white;
+	background:rgba(255,255,255,0.8);
+	-webkit-border-radius:3px; }
+div#timeline span em { font-size:9px; color:#777; }
+div#timeline li a:hover span,
+div#timeline li.hovering a span { background:rgba(79,96,122,0.9); background:none;
+	color:royalblue !important; }
+div#timeline li.selected { display:block; }
+div#timeline li.selected span { color:indianred; }
+div#timeline li.selected a { 
+	height:5px; }
+div#timeline li.blurred span { color:#aaa !important; }
+div#timeline li.blurred em { color:#ccc !important; }
+div#timeline li a:hover span { /*color:rgb(49,56,82);*/ }
+div#timeline li.selected a span { /*color:rgb(49,56,82);*/ }
+
+div#timeline div.icon {
+	position:absolute; width:15px; height:15px;
+	bottom:0px; left:-5px;
+}
+
+div#timeline_name { position:absolute; background:royalblue;
+	color:white; padding:5px; width:150px; z-index:1000;
+	font-size:.7em; text-align:right;
+	-webkit-border-radius:5px;
+	-moz-border-radius:5px; }
+
+div#timeband { position:absolute; top:0px; left:0px; width:10000px; height:15px;
+	background:rgb(93,91,114); border-bottom:1px solid rgb(83,81,104); z-index:10;
+	border-top:1px solid rgb(83,81,104); cursor:row-resize; z-index:99;
+	background:rgb(133,131,154); border-color:white; }
+div#timeband span { display:block; position:absolute; top:0px; width:15px; height:10px;
+	font-size:10px; color:white; }
+div#timeband span.small { font-size:10px; color:white; color:rgba(255,255,255,0.4); }
+
+div.timeline div.tickmarks { position:absolute; top:0px; left:0px; width:10000px;
+	height:200px; z-index:0; opacity:0.8; }
+div.tickmarks div.year { height:500px; border-left:1px dashed #ddd; width:1px;
+	position:absolute; top:0px; left:0px; }
+
+div#timespan { height:15px; width:500px; position:absolute; top:0px; left:0px;
+	background:indianred; opacity:0.3; overflow:hidden; z-index:100; cursor:move; }
+div.timespan-handle { height:25px; background:firebrick; width:10px; cursor:col-resize; }
+div.timespan-handle.left { position:absolute; top:0px; left:0px; }
+div.timespan-handle.right { position:absolute; top:0px; right:0px; }
+	
+div.timeline-person { position:absolute; top:15px; left:0px; background:rgb(79,96,122);
+	z-index:0; overflow:hidden; color:white; font-size:10px;
+	border-right:1px solid rgb(69,86,112); border:none;
+	background:#ddd; background:rgba(200,200,200,0.5); }
+div.timeline-person a { color:white; display:block; padding:5px;
+	position:absolute; top:0px; left:0px; width:75px; color:royalblue; }
+div.timeline-person:hover { background:rgb(93,91,114); overflow:visible; z-index:4;
+	opacity:1.0; background:#ccc; }
+div.timeline-person:hover a { background:#aaa; }

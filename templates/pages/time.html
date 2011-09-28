@@ -1,0 +1,150 @@
+<script type="text/javascript">
+Archmap.whenReady(function(){
+	// two widths to choose from
+	var big_width = "73%";
+	var small_width = "27%";
+	var speed = 150;
+	
+	var _a = Archmap;
+	
+	// layout setup code
+	Archmap.LayoutManager.fullscreen(
+	    [ "div.lining", ".MapComponent2", ".ProfileComponent", "#HelloPanel" ],
+	    function(maxHeight){
+	        $("div#left_sidebar").width(small_width);
+    		$("div#right_main").width(big_width);
+    		$("div.TimelineComponent").css('height',105);
+    		$("div.ProfileComponent").width("100%").css("display","none"); // maybe not?
+	    });
+	// adjust the logo position
+	Archmap.LayoutManager.fullscreenLogo();
+	
+	var setup = function() {
+	  var map = $(".MapComponent2").data("thisComponent").map;
+	  var story = $(".StoryLegend").data("thisComponent");
+	  
+	  $(".StoryLegend a").click(function(){
+	    return false;
+	  });
+	  
+	  //$("html").trigger("timelineHeightTo",[150]);
+	  
+	  $("#example").click(function(){
+	    $("li.top:nth-child(2)").children("span").trigger("click");
+	    //$("span:contains('Reign of Louis VII')").trigger("click");
+	    setTimeout(function(){
+	      $("span:contains('Lognon')").trigger("click");
+	    },10);
+      return false;
+    });
+    
+    $("#timeline").toggle(function(){
+      $("html").trigger("timelineHeightTo",[200]);
+      //$("span:contains('Reign of Louis VII')").trigger("click").trigger("click");
+      //$(".beingDisplayed").trigger("click");
+      story.deselectAllItems();
+    },function(){
+      $("html").trigger("timelineHeightTo",[50]);
+    });
+    
+    $("#example").click();
+	  
+	  var selectItem = story.selectItem;
+	  story.selectItem = function(item) {
+	    selectItem.apply(story,arguments);
+	    
+	    if(item.hasClass("beingDisplayed")) { // remove its map
+  			item.data("overlay").hide();
+  			item.removeClass("beingDisplayed");
+  			$(".overlayControlPanel").remove();
+  		}
+  		else {
+		    if(item.hasClass("overlayPrepared")) {
+					item.data("overlay").show();
+					$("*").removeClass("beingDisplayed");
+					item.addClass("beingDisplayed");
+				}
+				else {
+					var overlay = new _a.HistoricalMapOverlay({
+						model: item.data("model"),
+						map: map
+					});
+					item.data("overlay",overlay);
+					$("div").removeClass("beingDisplayed");
+					item.addClass("beingDisplayed").addClass("overlayPrepared");
+				}
+				
+				$(".overlayControlPanel").remove();
+				var overlay = item.data("overlay"),
+				  model = item.data("model"),
+				  //slider = $("<div/>");
+				  slider = $("<input/>",{
+            type: "range",
+            change: function(){
+              overlay.changeOpacity(slider.attr("value")/100);
+            }
+          });
+				
+				_a.IO.require("dependencies/DragDropSort",function(){
+					var popover = _a.Elements.UIStuff.helpPopover({
+					    html: slider
+					        .before($("<a/>",{
+					            "class": "block-link",
+					            href: "/"+model.key(),
+					            text: model.get("shortname")
+					        }))
+					        .after($("<div/>",{
+					            html: model.get("descript")
+					        })),
+					    css: {
+					        top: 150,
+					        right: 25
+					    },
+					    extraClasses: "overlayControlPanel"
+					});
+					$("div#container").append(popover);
+					popover.draggable({ containment: "#container" });
+				});
+		  };
+	  };
+	};
+	
+	_a.IO.require("components/AMap2",function(){
+	  setTimeout(setup,3000);
+	});
+	
+});
+</script>
+<AM:source key="collection/1"/>
+<div id="left_sidebar">
+ <div class="lining">
+  <div id="HelloPanel">
+   <div class="padding">
+    <div class="instructions">
+     <div class="two" style="padding-bottom:5px">
+      <span style='font-size:10px;width:70%'>To view an interactive animation of the French Royal lands, click on the button to the right.</span>
+      <a href="/mapping" class="try" rel="click">Animated Map</a>
+     </div>
+     <div class="two" style="padding-bottom:5px">
+        <span style='font-size:10px;width:70%'>To view buildings arranged on a timeline according to approximate start date, click on the button to the right. Move the burgundy overlay to change the range of dates and buildings shown.</span>
+        <a href="#" class="try" rel="click" id="timeline">Timeline</a>
+     </div>
+     <div class="two" style="padding-bottom:5px">
+       <span style='font-size:10px;width:70%'>Use the legend below to explore the relationship of Gothic buildings to contemporary geo-political divisions.</span>
+       <a href="#" class="try" rel="click" id="example" style="display:none">Example</a>
+      </div>
+    </div>
+    <AM:StoryLegend rel="collection/1369"></AM:StoryLegend>
+   </div>
+  </div>
+  <AM:ProfileComponent options="hide:div.instructions,.StoryLegend"></AM:ProfileComponent>
+ </div>
+</div> <!-- end of the left_sidebar -->
+<div id="right_main">
+ <div class="lining">
+  <AM:MapComponent2
+    options="buildingZoom:true;legend:true">
+  </AM:MapComponent2>
+  <AM:TimelineComponent></AM:TimelineComponent>
+ </div>
+</div>

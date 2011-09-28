@@ -1,0 +1,57 @@
+<div class="overflap" style="width:70%">
+  <div class="overflap-inner">
+    <div class="imagebox">
+      <h3 class="imagetitle editable clickable">{ $model->get("title") }</h3>
+      <div class="imagemedium">
+       <a href="/image/{ $model->get('id') }?view=zoom&mode=naked">
+        <img src="{ $model->url(700) }"/>
+       </a>
+      </div>
+      <? if($user->isGoodAt(4)): ?>
+      <div class="sizes">
+       <ul class="clear">
+        <li><a href="{ $model->url(50) }">50</a></li>
+        <li><a href="{ $model->url(100) }">100</a></li>
+        <li><a href="{ $model->url(300) }">300</a></li>
+        <li><a href="{ $model->url(700) }">700</a></li>
+        <li><a href="{ $model->url(1300) }">1300</a></li>
+        <li><a href="{ $model->url(1700) }">1700</a></li>
+        <li><a href="{ $model->url('full') }">full</a></li>
+       </ul>
+      </div>
+      <? endif ?>
+    </div>
+  </div>
+</div>
+<div class="underflap" style="width:30%">
+ <div class="underflap-inner">
+  <div class="nextprev_image clear">
+   <div class="image prev_image">
+    <a href="/image/{ $model->previousImage()->get('id') }"
+       style="padding-top:{ $model->previousImage()->getHeightPaddingForSize(100) }">
+     <img src="{ $model->previousImage()->url(100) }"/>
+     <div class="direction">&laquo;</div>
+    </a>
+   </div>
+   <div class="image next_image">
+    <a href="/image/{ $model->nextImage()->get('id') }"
+       style="padding-top:{ $model->nextImage()->getHeightPaddingForSize(100) }">
+     <img src="{ $model->nextImage()->url(100) }"/>
+     <div class="direction">&raquo;</div>
+    </a>
+   </div>
+  </div>
+  <div class="comp">
+   <h5><a href="/{ $model->getBuilding()->__toString() }">{ $model->getBuilding()->get("name") }</a></h5>
+  </div>
+  <div class="comp">
+   <h5><a href="/{ $model->getBuilding()->__toString() }/images/page/<?= $model->getResultsPageNumber(25) ?>">See all Images</a></h5>
+  </div>
+  <div class="comp">
+   <!--<AM:PlanComponentM loaddefer="true" style="background:#eee"></AM:PlanComponentM>-->
+  </div>
+  <div class="comp">
+   <AM:KeywordComponent></AM:KeywordComponent>
+  </div>
+ </div>
+</div>

@@ -1,0 +1,64 @@
+<script type="text/javascript">
+$(function(){
+	setTimeout(function(){
+		$("li.narrative").each(function(){
+			var count = 0;
+			$(this).find("p").each(function(){
+				if($(this).text() != "")
+					count += 1;
+			});
+			if(count > 0)
+				$(this).find("div.descript").slideDown();
+			else {
+				$(this).parent().append("<li id='"+$(this).attr("id")+"'>"+$(this).html()+"</li>");
+				$(this).remove();
+			}
+		});
+		$("div#loading").fadeOut("slow");
+		$("ul#members").fadeIn("slow");
+	},100);
+	
+	$(".show-hide").live("click",function(){
+		if(!$(this).hasClass("open")) {
+			$(this).next(".descript").slideDown();
+			$(this).addClass("open");
+		}
+		else {
+			$(this).next(".descript").slideUp();
+			$(this).removeClass("open");
+		}
+		return false;
+	});
+});
+</script>
+<!-- source: catalog/building -->
+<div id="unique">
+ <h1><span rel="name" class="field"></span></h1>
+</div>
+<div id="fullwidth">
+ <div id="fullwidth-inner">
+  <ul id="members" class="narratives" style="display:none">
+   <?php foreach($model->members() as $building): ?>
+   <li class="narrative model_holder" id="{$building->get('id')}" rel="building/{$building->get('id')}">
+    <div class="medium-building">
+     <?php if($building->summaPoster()): ?>
+	 <div class="img"><a href="image/{$building->summaPoster()->get('id')}" class="biggable">
+	  <img src="{$building->summaPoster()->get('thumbnail')}"/></a>
+	 </div>
+	 <?php endif ?>
+	 <h4><a href="/building/{$building->get('id')}">{ $building->get("name") }</a></h4>
+	 <a href="#show-hide" class="show-hide">( Show the Building Narrative )</a>
+	 <div class="descript">
+	  <h4>Plan</h4><p class="editable hoverable">{ $building->get("plan") }</p>
+	  <h4>Elevation</h4><p class="editable hoverable">{ $building->get("elevation") }</p>
+	  <h4>History</h4><p class="editable hoverable">{ $building->get("history") }</p>
+	  <h4>Chronology</h4><p class="editable hoverable">{ $building->get("chronology") }</p>
+	  <h4>Significance</h4><p class="editable hoverable">{ $building->get("significance") }</p>
+	  <h4>Bibliography</h4><p class="editable hoverable">{ $building->get("bibliography") }</p>
+	 </div>
+	</div>
+   </li>
+   <?php endforeach ?>
+  </ul>
+ </div>
+</div>

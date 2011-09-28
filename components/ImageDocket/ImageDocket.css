@@ -1,0 +1,26 @@
+div.ImageDocket {
+	background:white;
+	background-image:-webkit-gradient(linear, 0% 0%, 0% 15%, from(#ECECEC), to(whitesmoke));
+	background-image:-moz-linear-gradient(top,#ECECEC,whitesmoke);
+	-webkit-box-shadow:0px 1px 2px rgba(0,0,0,0.3);
+   -moz-box-shadow:0px 1px 2px rgba(0,0,0,0.3);
+   margin-bottom:25px;
+}
+div.ImageDocket div.visible {
+   padding:0; margin:0;
+}
+div.ImageDocket span.title { background:none; border:none;
+	font-size:12px; font-family:Helvetica,Arial,sans-serif;
+	color:rgb(90,105,155);
+	color:royalblue; padding:12px;
+	display:block; margin-left:15px;
+	font-weight:bold; cursor:pointer; }
+div.ImageDocket div.imageDrop {
+	border:5px solid #eee;
+	margin:10px 0px;
+	height:400px; overflow:auto;
+}
+div.ImageDocket a.docket-image-link {
+	display:block; margin:5px;
+	text-align:center;
+}

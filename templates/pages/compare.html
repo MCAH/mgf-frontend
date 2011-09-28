@@ -1,0 +1,72 @@
+<AM:source key="you"/>
+<script type="text/javascript">
+Archmap.whenReady(function(){
+    
+    Archmap.LayoutManager.fullscreen("#comparison");
+    
+    var path = window.location.hash,
+        bigbox = $("div#comparison"),
+        $window = $(window),
+        components = []; // the component we end up making
+        
+    Archmap.IO.require("components/GImageViewer",function(){
+        loadImages(path);
+    });
+    
+    // now see if the url changes
+    setInterval(function(){
+        var current = window.location.hash;
+        if(path !== current) {
+            path = current;
+            loadImages(path);
+        }
+    },200);
+    
+    // the function that does stuff
+    function loadImages(path) {
+        var images = path.replace("#/","").split("/");
+        // clear the spot and the component cache
+        components = [];
+        bigbox.empty();
+        // make a gviewer for each one
+        _.each(images,function(id){
+            var dims = layout(images.length), // calculate the layout
+                sandbox = $("<div/>",{
+                    "class": "GImageViewer comparisonViewer",
+                    css: {
+                        width: dims.width,
+                        height: dims.height,
+                        "float": "left"
+                    }
+                });
+            bigbox.append(sandbox);
+            // now get the image, and make the component
+            Archmap.dataStore.get("image/"+id,function(image){
+                var viewer = new Archmap.GImageViewer({
+                    sandbox: sandbox,
+                    provider: image,
+                    allowCarding: true
+                });
+            });
+        });
+    }
+    
+    function layout(howmany) {
+        return {
+            width: ($window.width()/howmany) - 5,
+            height: $window.height()
+        };
+    }
+    
+    $window.resize(function(){
+        var viewers = $(".GImageViewer"),
+            dims = layout(viewers.length);
+        viewers.each(function(){
+            $(this)
+                .height(dims.height)
+                .width(dims.width);
+        });
+    });
+});
+</script>
+<div id="comparison" class="clear"></div>

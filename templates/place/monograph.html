@@ -1,0 +1,27 @@
+<div class="overflap clear" style="width:70%">
+ <div class="overflap-inner clear">
+  <div id="unique">
+   <div id="unique-inner">
+    <h1><span class="pretty editable clickable">{ $model->get("name") }</span><small>Collection</small></h1>
+   </div>
+  </div>
+   <div id="monograph">
+    <div id="monograph-inner">
+     <h4>Description</h4>
+     <p class="editable hoverable">{ $model->get("descript") }</p>
+    </div>
+   </div>
+   <div id="always_on">
+    <? if(strlen($model->get("descript")) < 50): ?>
+     <div class="submit">Mapping Gothic France is still in beta. If you'd like to submit a text for this entry, email Prof. Murray at <a href="mailto:sm42@columbia.edu">sm42@columbia.edu</a></div>
+    <? endif ?>
+   </div>
+ </div>
+</div>
+<div class="underflap" style="width:30%">
+ <div class="underflap-inner">
+  <div class="MapComponent2 component" rel="this" style="height:500px">
+   <!--<div id="TimelineComponent" class="component" rel="this"></div>-->
+  </div>
+ </div>
+</div>

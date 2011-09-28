@@ -1,0 +1,74 @@
+/* Profile Component */
+
+div.ProfileComponent { position:absolute; top:0px; left:0px;
+	width:17%;
+	-webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, .3);
+	-moz-box-shadow: 0 5px 15px rgba(0, 0, 0, .3);
+	z-index:1000;
+}
+	
+div.ProfileComponent div#map_profile { z-index:100000000000;
+	font-family:'Palatino Linotype','Book Antiqua',Palatino,serif;
+	overflow-y:auto; overflow-x:hidden; padding-bottom:25px;
+	opacity:0.95; overflow:hidden;
+	padding-top:8px; padding-left:3px;
+}
+div.ProfileComponent div#map_profile ul { }
+
+div.ProfileComponent div#map_profile li {
+	float:left; overflow:hidden;
+	margin:2px;
+	position:relative;
+	-webkit-box-shadow: 0 2px 2px rgba(0, 0, 0, .3);
+	-moz-box-shadow: 0 3px 3px rgba(0, 0, 0, .3); }
+
+div#map_profile div.li-wrapper { text-align:center; overflow:hidden;
+	padding-top:0px; padding-top:0px; border-top:1px solid #ddd; }
+
+/*
+div.ProfileComponent div#map_profile h1 { font-size:18px; }
+div.ProfileComponent div#map_profile h1 span { background:white;
+	background:rgba(255,255,255,0.7); padding:5px; clear:left; }
+div.ProfileComponent div#map_profile h1 em { background:white;
+	background:rgba(255,255,255,0.7); padding:5px; }
+div.ProfileComponent div.small_monograph { padding:15px; background:white;
+	background:rgba(255,255,255,0.6); display:none; }
+div.ProfileComponent div.small_monograph h3 { color:#333; }
+div.ProfileComponent h3 a { color:rgb(93,91,114); text-decoration:underline; }
+*/
+
+div.ProfileComponent h5 { position:absolute; bottom:-8px; left:0px;
+	text-align:center; width:100%; font-family:Arial,Helvetica,sans-serif;
+	font-weight:normal; font-size:10px; color:#555;
+	background:white; background:rgba(255,255,255,0.8);
+	padding-top:3px; padding-bottom:3px; }
+div.ProfileComponent h5.semihidden { display:none; }
+
+div.ProfileComponent a.postersize {
+   background:white;
+   display:block;
+   padding:2px;
+}
+div.ProfileComponent a.postersize:hover h5 {
+   background:royalblue;
+   color:white;
+}
+
+div.ProfileComponent li:hover h5.semihidden { display:block; }
+
+div.ProfileComponent strong.close { display:block; position:absolute; padding:5px;
+	top:5px; right:5px; cursor:pointer; display:none;
+	opacity:0.7; }
+div.ProfileComponent li:hover strong.close { display:block; }
+	
+div.ProfileComponent h5 small { color:#777; font-weight:normal; font-style:italic; display:block;
+	 margin-top:8px; }
+div.ProfileComponent div.small_monograph p { line-height:175%; font-size:11px;
+	margin-top:25px; font-family:Georgia,serif; }
+div.ProfileComponent h5 { color:rgb(100,109,135); margin-bottom:10px; }
+div.ProfileComponent div#profile_options { position:absolute;
+	bottom:0px; left:0px; padding:5px; background:none; }
+
+div#profile_dragbar { width:5px; position:absolute; top:0px; right:0px;
+	background:#ccc; background:rgba(150,150,150,0.5); }
+div#profile_dragbar:hover { background:#aaa; cursor:col-resize; }

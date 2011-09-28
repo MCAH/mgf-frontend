@@ -1,0 +1,17 @@
+<div class="overflap extrawide clear" style="width:99%">
+ <div class="overflap-inner clear">
+  <h1 class="link"><a href="/building/{ $model->get('id') }">{ $model->get("name") }</a></h1>
+  <h3 class="subtitle">Images</h3>
+  <?= $pager ?>
+  <ul class="tray clear images" rel="images">
+   <?php foreach($response as $key=>$image): ?>
+    <li>
+     <a href="/image/{ $image->get('id') }">
+      <AM:ImageComponent rel="<?= $image->keyToken() ?>"></AM:ImageComponent>
+     </a>
+    </li>
+   <?php endforeach ?>
+  </ul>
+  <?= $pager ?>
+ </div>
+</div>

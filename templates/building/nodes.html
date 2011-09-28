@@ -1,0 +1,17 @@
+<div class="overflap extrawide clear">
+ <div class="overflap-inner clear">
+  <h1 class="link"><a href="/building/{ $model->get('id') }">{ $model->get("name") }</a></h1>
+  <h3 class="subtitle">Panoramas</h3>
+  <p style="width:65%;font-size:12px;color:#333;margin:15px 15px 50px 5px;background:#eee;padding:15px">Click any image below to open a panorama. To navigate the panorama, click on the image and hold, then move your mouse. To zoom out, hold down the control key or click the - on the screen. To zoom in, hold down the shift key or click the + on the screen. To have the panorama fill your screen, click on the [] button between the + and -.</p>
+  <ul class="tray clear nodes">
+   <?php foreach($model->nodes() as $key=>$node): ?>
+    <li style="height:200px;width:225px">
+     <a style='display:block' href="/node/{ $node->get('id') }" class="biggable">
+      <img width=215 src="{ $node->get('thumbnail') }"/>
+      <span style='display:block;color:#555;margin-top:15px;font-size:12px'>{ $node->get('title') }</span>
+     </a>
+    </li>
+   <?php endforeach ?>
+  </ul>
+ </div>
+</div>

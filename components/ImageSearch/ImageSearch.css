@@ -1,0 +1,96 @@
+/* imagesearch */
+
+div.ImageSearch {
+   position:relative;
+}
+div.ImageSearch div.results {
+   width:700px;
+   float:left;
+   margin-left:25px;
+}
+div.ImageSearch div.result {
+   border:1px solid #eee; padding:15px;
+   margin-bottom:15px;
+}
+div.ImageSearch div.result.collapsed {
+   height:0px; background:whitesmoke;
+   overflow:hidden;
+}
+div.ImageSearch div.image {
+   float:left;
+   width:150px;
+   height:150px;
+   padding:5px; margin:0px 5px 5px 0px;
+   -webkit-box-shadow:0px 1px 3px rgba(0,0,0,0.3);
+}
+div.ImageSearch div.results a {
+   display:block;
+}
+div.ImageSearch div.controls {
+   width:200px;
+   padding:10px;
+   -webkit-box-shadow:0px 1px 5px rgba(0,0,0,0.3);
+   float:left;
+}
+
+div.ImageSearch div.controls ul {
+   display:none;
+   height:75px;
+   overflow:auto;
+   margin-top:10px;
+}
+div.ImageSearch div.list {
+   margin-bottom:10px;
+   padding-bottom:10px;
+   border-bottom:1px dotted #ccc;
+}
+div.ImageSearch h5 {
+   color:#777;
+   padding:5px;
+   font-size:12px;
+   background:#eee;
+}
+div.ImageSearch div.list input,
+div.ImageSearch div.natural input {
+   font-family:"Helvetica Neue",Arial,Helvetica,sans-serif;
+   font-weight:bold; color:royalblue;
+   font-size:12px; padding:5px;
+   border:1px solid #ccc;
+   width:188px;
+}
+div.ImageSearch li.choice {
+   font-size:11px; color:royalblue;
+   cursor:pointer; font-weight:bold;
+   border-bottom:1px dotted #eee;
+   padding:2px 0px;
+}
+div.ImageSearch li.choice.unavailable {
+   color:#aaa;
+}
+div.ImageSearch div.selections {
+   margin:5px 0px;
+}
+div.ImageSearch div.selected {
+   background:royalblue;
+   color:white;
+   font-size:11px; padding:5px;
+   margin-bottom:1px;
+   -webkit-box-shadow:0px 1px 2px rgba(0,0,0,0.3);
+   background-image:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#468EE6), to(#0063DC));
+   background-image:-moz-linear-gradient(top,#468EE6,#0063DC);
+   position:relative;
+}
+div.ImageSearch div.selected span.delete {
+   background:cornflowerblue;
+   padding:2px 5px; color:white;
+   -webkit-box-shadow:0px 1px 2px rgba(0,0,0,0.3);
+   position:absolute; top:3px; right:3px;
+   cursor:pointer;
+}
+div.ImageSearch div.boolean {
+   margin-bottom:10px;
+}
+div.ImageSearch div.boolean span {
+   font-size:10px; color:#555;
+   padding-right:10px; padding-left:5px;
+}

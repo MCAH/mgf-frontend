@@ -1,0 +1,7 @@
+div.SectionComponent {
+   position:relative;
+   margin-bottom:25px;
+}
+div.SectionComponent div.imageviewer {
+   height:250px;
+}

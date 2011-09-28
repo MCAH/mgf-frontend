@@ -1,0 +1,86 @@
+/* StoryLegend */
+
+div.StoryLegend {
+   overflow:auto;
+   font-family:"Helvetica Neue",Arial,Helvetica,sans-serif;
+   /*background:url(/media/ui/amiens.jpg);*/
+}
+div.StoryLegend div.padding {
+   
+   position:relative; z-index:100;
+   background:rgba(255,255,255,0.8);
+}
+div.StoryLegend div.detailWindow {
+   position:absolute; top:15px; left:100%;
+   width:150px;
+}
+div.StoryLegend div.detailWindow p {
+   margin-top:10px; color:#333;
+   font-size:11px; line-height:175%;
+}
+div.StoryLegend h3 {
+   font-family:"Helvetica Neue",Arial,Helvetica,sans-serif;
+   font-size:14px; padding:10px;
+   margin-bottom:0px;
+   margin-top:-5px;
+   font-weight:bold;
+}
+div.StoryLegend div.movers {
+   position:relative;
+   height:40px;
+}
+div.back, div.forth {
+   position:absolute;
+   color:indianred;
+   font-family:Georgia,sans-serif;
+   font-size:35px;
+   cursor:pointer;
+   top:0px;
+   opacity:0.7;
+}
+div.back:hover, div.forth:hover {
+   opacity:1.0;
+}
+div.back.disabled,
+div.forth.disabled {
+   opacity:0.3;
+}
+div.back { left:35px; }
+div.forth { left:10px; }
+div.StoryLegend ul.top {
+   font-size:11px;
+}
+div.StoryLegend span {
+   cursor:pointer;
+   display:block;
+   padding:8px 10px;
+}
+div.StoryLegend li.top {
+   border-top:2px solid white;
+   margin-bottom:2px;
+   color:royalblue; font-weight:bold;
+}
+div.StoryLegend ul.inner {
+   display:none;
+   padding:5px;
+   margin:4px 5px;
+}
+div.StoryLegend li.inner {
+   color:royalblue;
+   font-weight:normal;
+}
+div.StoryLegend li.inner span {
+   padding:7px 10px;
+}
+div.StoryLegend ul.childSelected {
+   background:#eee;
+}
+div.StoryLegend li.highlitParent {
+   color:indianred;
+}
+div.StoryLegend li.highlit {
+   background:royalblue;
+   background-image:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#468EE6), to(#0063DC));
+   background-image:-moz-linear-gradient(top,#468EE6,#0063DC);
+   color:white;
+}

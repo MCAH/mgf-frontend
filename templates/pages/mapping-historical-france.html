@@ -1,0 +1,25 @@
+<AM:source key="collection/1369"/>
+<script type="text/javascript">
+Archmap.whenReady(function(){
+    var big_width = "70%";
+	var small_width = "30%";
+    // layout setup code
+	Archmap.LayoutManager.fullscreen(["div.lining",".MapComponent2",".StoryLegend"],
+	    function(maxHeight){
+	        $("div#left_sidebar").width(small_width);
+    		$("div#right_main").width(big_width);
+	    });
+	// adjust the logo position
+	Archmap.LayoutManager.fullscreenLogo();
+});
+</script>
+<div id="left_sidebar">
+ <div class="lining">
+  <AM:StoryLegend></AM:StoryLegend>
+ </div>
+</div>
+<div id="right_main">
+ <div class="lining">
+  <AM:MapComponent2 options="overlay:collection/1;overlayButton:true"></AM:MapComponent2>
+ </div>
+</div>

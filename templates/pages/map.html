@@ -1,0 +1,112 @@
+<script type="text/javascript">
+Archmap.whenReady(function(){
+	// two widths to choose from
+	var big_width = "73%";
+	var small_width = "27%";
+	var speed = 150;
+	
+	// layout setup code
+	Archmap.LayoutManager.fullscreen(
+	    [ "div.lining", ".MapComponent2", ".ProfileComponent", "#HelloPanel" ],
+	    function(maxHeight){
+	        $("div#left_sidebar").width(small_width);
+    		$("div#right_main").width(big_width);
+    		$("div.TimelineComponent").css('height',55);
+    		$("div.ProfileComponent").width("100%").css("display","none"); // maybe not?
+	    });
+	// adjust the logo position
+	Archmap.LayoutManager.fullscreenLogo();
+	
+	$("a.try").click(function(){
+	    var $this = $(this),
+	        rel = $this.attr("rel");
+	    if(rel === "click") {
+	        Archmap.mainDataProvider().select("building/1063");
+	        return false;
+	    }
+	    else if(rel === "multiple") {
+	        var offset = 0,
+	            churches = $this.attr("alt").split(",");
+	        _(churches).each(function(id){
+	            setTimeout(function(){
+	                Archmap.mainDataProvider().multiselect("building/"+id);
+	            },offset);
+	            offset += 800;
+	        });
+	        return false;
+	    }
+	    return true;
+	});
+	
+	var even = true;
+	// customized click for second box
+	$("a#timeclick").click(function(e,openmap){
+		
+  	if(openmap) {
+  	  $("div.historicalMaps strong.opener").trigger("click");
+  		setTimeout(function(){
+  			$("div.historicalMaps strong:contains('France in 1154')").trigger("click");
+  		},350);
+  	}
+		
+		setTimeout(function(){
+			if(even === true) { // mmm closure
+				$("html").trigger("timelineHeightTo",[150]);
+				even = false;
+			}
+			else {
+				$("html").trigger("timelineHeightTo",[25]);
+				even = true;
+			}
+		},100);
+		return false;
+		
+	});
+	
+});
+</script>
+<AM:source key="collection/1"/>
+<div id="left_sidebar">
+ <div class="lining">
+  <div id="HelloPanel">
+   <div class="padding">
+    <div class="instructions">
+     <div class="two">
+      <span>Click any church marker on the map to view it in this sidebar.</span>
+      <a href="#" class="try" rel="click">Example</a>
+     </div>
+     <div class="two">
+      <span>Shift-click to select multiple churches. Here are two example groups.</span>
+      <a href="#" class="try" rel="multiple" alt="1063,1006,1054,1024,1037,1048">Picardy</a>
+      <a href="#" style="top:37px;" class="try" rel="multiple" alt="1114,1088,1099,1144">Normandy</a>
+     </div>
+     <div class="three">
+      <span>Double-click any marker to visit that church's monograph page.</span>
+      <a href="/building/1063" class="try">The Amiens<br/>Monograph</a>
+     </div>
+     <!--<div class="three">
+      <span>You can also select buildings using the timeline. To navigate, drag it as with the map.</span>
+      <a href="#" class="try" id="timeclick">Expand the<br/>Timeline</a>
+     </div>-->
+     <div class="four">
+      <span>Or to compare multiple churches.</span>
+      <a href="/comparisons" class="try">Comparisons</a>
+     </div>
+     <div class="five">
+       <span>Or experiment with a simulation of the structural behavior of arched masonry.</span>
+       <a href="/pasteboard" class="try">The Simulation</a>
+      </div>
+    </div>
+   </div>
+  </div>
+  <AM:ProfileComponent options="hide:div.instructions"></AM:ProfileComponent>
+ </div>
+</div> <!-- end of the left_sidebar -->
+<div id="right_main">
+ <div class="lining">
+  <AM:MapComponent2
+    options="buildingZoom:true;legend:true">
+  </AM:MapComponent2>
+  <!--<AM:TimelineComponent></AM:TimelineComponent>-->
+ </div>
+</div>

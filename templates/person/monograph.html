@@ -1,0 +1,56 @@
+<div class="overflap clear">
+ <div class="overflap-inner clear">
+  <div id="unique">
+   <h1><span class="editable clickable">{ $model->get('name') }</span></h1>
+  </div>
+  <div id="monograph">
+   <div id="monograph-inner">
+    <? if($user->get("id") == $model->get("id") && $model->get("id") != 428): ?>
+    <div id="change-password" style="margin-bottom:75px;">
+      <form method="post" action="/scripts/password.php">
+        <h5>Set a new password...</h5>
+        <div>
+          <label>Old</label>
+          <input name="old_pword" type="password"/>
+        </div>
+        <div>
+          <label>New</label>
+          <input name="new_pword" type="password"/>
+        </div>
+        <input name="uid" type="hidden" value="{ $model->get('id') }"/>
+        <input type="submit" value="Update Password"/>
+      </form>
+    </div>
+    <? endif ?>
+    <h4>About</h4>
+    <p class="editable hoverable">{ $model->get('descript') }</p>
+   </div>
+  </div>
+  <div id="always_on">
+   <? if(sizeof($model->get("images")->get("members")) > 0): ?>
+   <div class="portrait">
+    <img src="<? $image = $model->get("images")->get("members"); $image = $image[0]; echo $image->getObject()->url(300); ?>"/>
+   </div>
+   <? endif ?>
+   <div class="vitals">
+	 <ul>
+	  <? if($user->get("id") == $model->get("id") && $model->get("id") != 428): ?>
+	  <li><span>Email</span> <strong class="editable clickable">{ $model->get('email') }</strong></li>
+	  <? endif ?>
+	  <li><span>Born</span> <strong class="editable clickable">{ $model->get('beg_year') }</strong></li>
+	  <li><span>Died</span> <strong class="editable clickable">{ $model->get('end_year') }</strong></li>
+	  <li><span>Firstname</span> <strong class="editable clickable">{ $model->get('firstname') }</strong></li>
+	  <li><span>Lastname</span> <strong class="editable clickable">{ $model->get('lastname') }</strong></li>
+	  <li><span>Wikipedia</span> <strong class="editable clickable">{ $model->get('wikipedia') }</strong></li>
+	 </ul>
+   </div>
+   <AM:RelationsComponent></AM:RelationsComponent>
+  </div>
+ </div> <!-- end of overflap-inner -->
+</div> <!-- end of overflap -->
+<div class="underflap">
+ <div class="underflap-inner">
+ <AM:UploadComponent></AM:UploadComponent>
+ <AM:ListComponent class="verysimple" rel="collection/290" loaddefer="true"></AM:ListComponent>
+ </div>
+</div> <!-- end of the underflap -->

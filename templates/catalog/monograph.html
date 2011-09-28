@@ -1,0 +1,18 @@
+<div class="overflap" style="width:85%;">
+ <div class="overflap-inner" style="padding-top:35px;">
+  <ul class="list-tray clear">
+   <?php foreach($model->members() as $member): ?>
+    <li><span class="inner">
+     <?php if(method_exists($member,"summaPoster") && $member->summaPoster()): ?>
+     <a href="/image/{ $member->summaPoster()->get('id') }" class="biggable">
+      <img src="{ $member->summaPoster()->get('thumbnail') }"/>
+     </a>
+     <?php endif ?>
+     <a class="name" href="/{ $member->keyToken() }">
+      <span>{ $member->get('name') }</span>
+     </a>
+    </span></li>
+   <?php endforeach ?>
+  </ul>
+ </div>
+</div>

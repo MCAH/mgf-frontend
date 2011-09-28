@@ -1,0 +1,17 @@
+<AM:source key="collection/373"/>
+<script type="text/javascript">
+$(function(){
+	Archmap.biggifyThePage();
+	$("div#container")
+		.css("background","url(/media/ui/coutances.png) !important")
+		.css("background-attachment","fixed !important")
+		.css("background-position","100px -200px !important");
+});
+</script>
+<div class="essay">
+ <div class="padding">
+  <h2>{ $model->get("name") }</h2>
+  <p class="editable hoverable">{ $model->get("descript") }</p>
+  <AM:ListComponent class="nonames"></AM:ListComponent>
+ </div>
+</div>

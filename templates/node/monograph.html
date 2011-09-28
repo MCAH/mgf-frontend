@@ -1,0 +1,21 @@
+<div id="unique">
+ <div id="unique-inner">
+  <h1><span>{ $model->title }</span><small>Node</small></h1>
+  <h5><a href="/building/{$model->building_id}">{ $model->building_name }</a></h5>
+ </div>
+</div>
+<div id="imagewidth">
+ <div id="imagewidth-inner">
+  <object height="55%" codebase="http://fpdownload.macromedia.com/get/flashplayer/current/swflash.cab"><param name="movie" value="{ $model->swf }"/><param name="quality" value="high" /><param name="bgcolor" value="#111111" /><param name="allowScriptAccess" value="sameDomain" /><embed src="{ $model->swf }" quality="high" bgcolor="#111111" width="95%" height="85%" name="Archmap" align="middle" play="true" loop="false" quality="high" allowScriptAccess="sameDomain" type="application/x-shockwave-flash" pluginspage="http://www.adobe.com/go/getflashplayer"></embed></object>
+ </div>
+</div>
+<div id="monograph">
+ <div id="monograph-inner">
+  <h4>Caption</h4>
+  <div><p class="editable hoverable">{ $model->caption }</p></div>
+ </div>
+</div>
+<div id="always_on">
+ <div id="vitals">
+ </div>
+</div>

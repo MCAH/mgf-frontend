@@ -1,0 +1,20 @@
+<AM:source key="collection/2229"/>
+<script type="text/javascript">
+Archmap.whenReady(function(){
+    Archmap.LayoutManager.fullscreen([ "div.lining", ".AnimatedMap" ],function(height){
+        $(".BlurbAnimator").height(height);
+    });
+    Archmap.LayoutManager.fullscreenLogo();
+});
+</script>
+<div id="left_sidebar">
+ <div class="lining">
+  <AM:BlurbAnimator></AM:BlurbAnimator>
+ </div>
+</div>
+<div id="right_main">
+ <div class="lining">
+  <AM:AnimatedMap></AM:AnimatedMap>
+  <AM:SimpleTimeline></AM:SimpleTimeline>
+ </div>
+</div>

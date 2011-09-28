@@ -1,0 +1,21 @@
+/* Slide Carousel */
+
+div.SlideCarousel { position:relative;
+	height:165px; margin:35px 5px 0px 10px; }
+div.SlideCarousel div#carousel-inner { padding:5px; height:155px;
+	overflow:hidden; position:relative; }
+div.SlideCarousel strong { position:absolute; top:15px; right:5px;
+	padding:5px 5px 0px 3px;
+	background:white; background:rgba(255,255,255,0.95);
+	display:block; z-index:1000;
+	-webkit-box-shadow:0px 1px 5px rgba(0,0,0,0.2);
+	-moz-box-shadow:0px 1px 5px rgba(0,0,0,0.2); }
+div.SlideCarousel strong.last { right:60px; }
+div.SlideCarousel ul { position:absolute; width:2000px; padding:15px 0px 20px 0px;
+	border-top:1px solid #eee; border-bottom:1px solid #eee; }
+div.SlideCarousel ul li { float:left; text-align:center; padding:5px 10px; }
+div.SlideCarousel ul li img { border:2px solid #eee; }
+
+div.SlideCarousel .name-card-holder {
+	margin-left: 5px;
+}

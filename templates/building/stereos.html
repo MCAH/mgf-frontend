@@ -1,0 +1,25 @@
+<script type="text/javascript">
+   $(function(){
+      $(".popup").click(function(){
+         Archmap.ImageUtilities.openStereoViewerWith(
+            Archmap.dataStore.get($(this).next().attr("href").slice(1)).get("zoomify")
+         );
+      });
+   });
+</script>
+<div class="overflap extrawide clear">
+ <div class="overflap-inner clear">
+  <h1 class="link"><a href="/building/{ $model->get('id') }">{ $model->get("name") }</a></h1>
+  <h3 class="subtitle">Stereoscopic Images <small style="color:#aaa"><em>require red/cyan anaglyph 3d glasses, <a target="_blank" href="http://www.rainbowsymphonystore.com/red-cyan-paper-3d-glasses.html">available here</a></em></small></h3>
+  <ul class="tray clear">
+   <? foreach($model->stereos() as $stereo): ?>
+   <li>
+    <a class="biggable stereoscopic" href="/image/{ $stereo->get('id') }">
+      <img class="popup" src="{ $stereo->get('thumbnail') }"/>
+    </a>
+    <a class="moreinfo" href="/image/{ $stereo->get('id') }">More Info</a>
+   </li>
+   <? endforeach ?>
+  </ul>
+ </div>
+</div>

@@ -1,0 +1,18 @@
+<div id="unique">
+ <div id="unique-inner">
+  <h1><em>Walking around... </em><span class="pretty">{$model->get('name')}</span></h1>
+ </div>
+</div>
+<div id="fullwidth">
+ <div id="fullwidth-inner">
+  <ul class="tray clear" rel="images">
+   <?php foreach($model->walkabout() as $key=>$image): ?>
+    <li>
+     <a href="/image/{ $image->get('id') }" class="biggable">
+      <img src="{ $image->get('thumbnail') }"/>
+     </a>
+    </li>
+   <?php endforeach ?>
+  </ul>
+ </div>
+</div>

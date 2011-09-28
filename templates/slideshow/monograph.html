@@ -1,0 +1,25 @@
+<div id="unique">
+ <div id="unique-inner">
+  <h1><span>{ $model->name }</span> <small>Slideshow</small></h1>
+ </div>
+</div>
+<div id="monograph">
+ <div id="monograph-inner">
+  <ul class="slidetray clear">
+   <?php foreach($model->slides as $key=>$slide): ?>
+   <li>
+    <a href="/image/{$slide->image->Image->id}" class="biggable">
+     <img src="{$slide->image->Image->small}"/>
+    </a>
+   </li>
+   <?php endforeach ?>
+  </ul>
+ </div>
+</div>
+<div id="always_on">
+ <div id="vitals">
+  <ul>
+   <li>Building Assocation <strong class="editable clickable">{ $model->building_id }</strong></li>
+  </ul>
+ </div>
+</div>

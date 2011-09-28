@@ -1,0 +1,25 @@
+<div class="overflap clear" style="width:80%">
+ <div class="overflap-inner clear">
+  <div id="unique">
+   <h1><span class="pretty editable clickable">{ $model->get("name") }</span></h1>
+  </div>
+  <div class="MapComponent2 component" style="height:400px;margin-bottom:25px;"></div>
+  <div id="monograph">
+   <div id="monograph-inner">
+    <h4>About</h4>
+    <p class="editable hoverable">{ $model->get("descript") }</p>
+   </div>
+  </div>
+  <div id="always_on">
+   <div class="vitals">
+    <div id="ListComponent" class="component" rel="this"></div>
+    <ul>
+     <li><span>Short Name</span> <strong class="editable clickable">{ $model->get("shortname") }</strong></li>
+     <li><span>Start Date Represented</span> <strong class="editable clickable">{ $model->get("beg_year") }</strong></li>
+     <li><span>End Date Represented</span> <strong class="editable clickable">{ $model->get("end_year") }</strong></li>
+     <li><span>Folder Identifier</span> <strong>{ $model->get("identifier") }</strong></li>
+    </ul>
+   </div>
+  </div>
+ </div>
+</div>

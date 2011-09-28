@@ -1,0 +1,48 @@
+<div class="padding">
+ <div class="plan-component-inner">
+  <!-- positioned images go here -->
+ </div>
+ <div class="plan-image-view"></div>
+ <div id="plan-controls">
+  <div class="inner-controls">
+   <div class="select">
+    <select>
+	 <option value="all">All Levels</option>
+    </select>
+   </div>
+   <div class="toggles clear">
+	<div class="column">
+     <div class="checkbox">
+      <input type="radio" value="2" name="details" field="view_type" opposite="general views">Details</input>
+      <!--<input type="checkbox" value="2" name="details" field="view_type" opposite="general views" checked="true"/>
+      <label for="details">Details</label>-->
+     </div>
+     <div class="checkbox">
+      <input type="checkbox" value="1" name="general views" field="view_type" opposite="details" checked="true"/>
+      <label for="general views">General Views</label>
+     </div>
+    </div>
+    <div class="column">
+     <div class="checkbox">
+      <input type="checkbox" value="i" name="interiors" field="ext_int" opposite="exteriors" checked="true"/>
+      <label for="interiors">Interiors</label>
+     </div>
+     <div class="checkbox">
+      <input type="checkbox" value="e" name="exteriors" field="ext_int" opposite="interiors" checked="true"/>
+      <label for="exteriors">Exteriors</label>
+     </div>
+    </div>
+    <div class="column">
+	 <div class="checkbox">
+	  <input type="checkbox" value="1" name="images" field="media_type" opposite="nodes" checked="true"/>
+	  <label for="images">Images</label>
+     </div>
+     <div class="checkbox">
+	  <input type="checkbox" value="2" name="nodes" field="media_type" opposite="images" checked="true"/>
+	  <label for="nodes">Panoramas</label>
+	 </div>
+	</div>
+   </div>
+  </div>
+ </div>
+</div>

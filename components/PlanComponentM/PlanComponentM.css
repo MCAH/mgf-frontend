@@ -1,0 +1,101 @@
+/* Plan Component */
+
+div.plan-component-inner { width:300px;
+	background:white; position:relative; margin:auto auto;
+	padding-bottom:0px; padding-top:0px; margin-bottom:10px; margin-top:0px; }
+
+div.toggles {
+	font-size:10px; margin-top:15px;
+}
+div.toggles div.column { width:31%; float:left; border-left:1px dotted #ddd; margin-right:1%; }
+div.toggles div.checkbox { margin:7px 10px; }
+
+div.plotpoint { height:20px; width:20px; position:absolute;
+	-moz-border-radius:15px; top:0px; left:25px; display:block;
+	-webkit-border-radius:15px; opacity:0.4; background:#89c; background:none; }
+div.plotpoint.node { width:10px; height:10px; border:2px solid indianred; opacity:0.3; }
+div.plotpoint.highlighted { opacity:1.0; background:firebrick;
+	width:20px; height:20px; -webkit-border-radius:15px;
+	-moz-border-radius:15px; border:none; display:block;
+	z-index:1000000000000; }
+div.plotpoint.clicked { background:darkorchid; display:block; opacity:0.8; }
+
+
+
+div.PlanComponentM.foreground:hover { opacity:0.9; }
+
+div.PlanComponentM button.size-changer {
+   position:absolute;
+   top:15px; left:45px;
+   font-size:8px; border:none;
+   background:none;
+   cursor:pointer;
+   background:#668;
+   background-image:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#668), to(#558));
+   background-image:-moz-linear-gradient(top,#668,#558);
+   -webkit-box-shadow:0px 1px 2px rgba(0,0,0,0.5);
+   -moz-box-shadow:0px 1px 2px rgba(0,0,0,0.5);
+   color:white;
+}
+
+div.PlanComponentM div.plan_legend {
+   position:absolute;
+   top:15px;
+   right:15px;
+   height:47px;
+   width:95px;
+   background:url(/media/ui/plan_legend.png);
+}
+
+div.PlanComponentM div.plan {
+	height:425px;
+	background:white !important;
+}
+
+div.plan img {
+   width:auto !important;
+   height:auto !important;
+}
+div.plan div {
+   background-repeat:no-repeat !important;
+}
+
+div.PlanComponentM div.plan-controls {
+	border-top:1px dotted #ddd;
+	position:relative; padding:10px;
+}
+
+div.plan-image-view {
+	z-index:1000000000;
+	position:absolute;
+	padding:5px; background:white;
+	background:rgba(255,255,255,0.8);
+	-webkit-box-shadow:0px 1px 12px rgba(0,0,0,0.3);
+	-moz-box-shadow:0px 1px 12px rgba(0,0,0,0.3);
+	border:1px solid #eee;
+	display:none;
+	top:-25px; right:-15px;
+}
+div.plan-image-view img {
+   width:85px;
+}
+div.enlarged-plan div.plan-image-view img {
+   width:150px;
+}
+
+.planMarker {
+   display:block;
+   height:15px; width:15px; position:absolute;
+	overflow:hidden;
+	-webkit-border-radius:20px;
+	-moz-border-radius:20px;
+	border-radius:20px;
+	cursor:pointer; background:white; background:rgba(255,255,255,0.2); }
+.planMarker.panorama { border:1px solid indianred; }
+.planMarker.panorama.highlighted { background:cornflowerblue; }
+.planMarker.highlighted path {
+   stroke:red !important;
+   /*fill:red !important;*/
+}
+.planMarker.clicked { background:firebrick; }
+div.planMarker.permanent { background:royalblue; }

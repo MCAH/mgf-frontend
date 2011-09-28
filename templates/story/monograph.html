@@ -1,0 +1,31 @@
+<script type="text/javascript">
+$(function(){
+	//Archmap.biggifyThePage();
+	var small = "45%";
+	var large = "55%";
+	$("div.overflap").width(small);
+	$("div.underflap").width(large);
+	//$("div.StoryComponent").width(small).height($(window).height()-$("div#header").height()-2);
+	//$("div.MapComponent2").width(large).height($(window).height()-$("div#header").height()-2);
+	$("div#container").height($(window).height());
+	var max_height = $(window).height() - $("div#header").height() - $("div#footer").height() - 75;
+	$("div.StoryComponent").height(max_height);
+	$("div.MapComponent2").height(max_height);
+});
+</script>
+<!--<div id="big_background">
+ <div class="StoryComponent component"></div>
+ <div class="MapComponent2 component">
+  <div id="TimelineComponent" class="component"></div>
+ </div>
+</div>-->
+<div class="overflap clear">
+ <div class="overflap-inner clear">
+  <div class="StoryComponent component"></div>
+ </div>
+</div>
+<div class="underflap">
+ <div class="underflap-inner">
+  <div class="MapComponent2 component"></div>
+ </div>
+</div>

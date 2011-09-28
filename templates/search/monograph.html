@@ -1,0 +1,59 @@
+<script>
+Archmap.beforeReady(function(){
+  
+  Archmap.defineComponent({
+    name: "SimpleImageSearch",
+    extend: "GroupComponent",
+    methods: {
+      initialize: function() {
+        var searchterm = decodeURI($("#searchterm").text());
+        if(searchterm.split(" ").length < 2) {
+          return false;
+        }
+        
+        var that = this;
+        // need to load imagecomponent
+        Archmap.IO.getJSONModel("search/null/natural",function(res,obj){
+          var ul = $("<ul/>",{
+            className: "tray clear images"
+          });
+          _.each(obj.get("natural"),function(image){
+            var a = $("<a/>",{
+                href: "/"+image.key(),
+                className: "biggable"
+              }),
+              imgComp = new Archmap.ImageComponent({
+                sandbox: a,
+                provider: image,
+                height: 180,
+                width: 180
+              });
+            ul.append($("<li/>",{
+              html: a,
+              css: {
+                height: 250,
+                width: 270
+              }
+            }));
+          });
+          that.sandbox.append(ul);
+        },true,{
+          natural: searchterm
+        });
+      }
+    }
+  });
+  
+});
+</script>
+<div class="overflap clear extrawide">
+ <div class="overflap-inner clear">
+  <div id="unique">
+   <div id="unique-inner">
+    <h1><em>Searching... </em> <span id="searchterm">{ $model->get('name') }</span></h1>
+   </div>
+  </div>
+  <AM:ListComponent></AM:ListComponent>
+  <AM:SimpleImageSearch></AM:SimpleImageSearch>
+ </div>
+</div>

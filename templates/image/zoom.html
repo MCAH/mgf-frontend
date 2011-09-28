@@ -1,0 +1,10 @@
+<script type="text/javascript">
+Archmap.whenReady(function(){
+    Archmap.LayoutManager.fullscreen(".GImageViewer");
+    $(window).resize(function(){
+        var stage = $("#stage");
+        $(".GImageViewer").height(stage.height()).width(stage.width());
+    });
+});
+</script>
+<div class="GImageViewer component" rel="this"></div>

@@ -1,0 +1,26 @@
+<div class="overflap clear">
+ <div class="overflap-inner clear">
+  <div id="unique">
+   <h1><span>{ $model->get("name") }</span> <small>Historical Event</small></h1>
+  </div>
+  <div id="monograph">
+   <div id="monograph-inner">
+    <p class="editable hoverable">{ $model->get("descript") }</p>
+   </div>
+  </div>
+  <div id="always_on">
+   <div class="vitals">
+    <ul>
+	 <li><span>Begun around</span> <strong class="editable clickable">{ $model->get("beg_year") }</strong></li>
+	 <li><span>Ended around</span> <strong class="editable clickable">{ $model->get("end_year") }</strong></li>
+	</ul>
+   </div>
+   <div class="RelationsComponent component" rel="this"></div>
+  </div>
+ </div>
+</div>
+<div class="underflap">
+ <div class="underflap-inner">
+  <div class="MapComponent2 component" rel="this"></div>
+ </div>
+</div>

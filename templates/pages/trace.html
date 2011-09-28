@@ -1,0 +1,137 @@
+<AM:source key="map/22"/>
+<script src="http://maps.google.com/maps?file=api&v=2&sensor=false&key=ABQIAAAAgJRO_TVqqeU4BAawd660WhSG4kzKf-MhP6bIoklusVGEK8FYXxQBMFCC_S7vtJKyumB5raDVsPKxFA" type="text/javascript"></script>
+<script type="text/javascript">
+var _a = Archmap;
+
+function overlay_map(xml,map,path) {
+    var path_to_tiles = path,
+        bb = $(xml).find("BoundingBox"),
+        mapBounds = new GLatLngBounds(
+            new GLatLng(bb.attr("minx"),bb.attr("miny")),
+            new GLatLng(bb.attr("maxx"),bb.attr("maxy"))
+        ),
+        min_zoom = parseInt($(xml).find("TileSet:first").attr("href").match(/[0-9]+$/),10),
+        max_zoom = parseInt($(xml).find("TileSet:last").attr("href").match(/[0-9]+$/),10),
+        tilelayer = new GTileLayer(GCopyrightCollection(''), min_zoom, max_zoom, {opacity:0.7}),
+        mercator = new GMercatorProjection(max_zoom+1);
+
+    tilelayer.getTileUrl = function(tile,zoom) {
+        if ((zoom < min_zoom) || (zoom > max_zoom)) {
+            return "http://www.maptiler.org/img/none.png";
+        }
+        var ymax = 1 << zoom,
+            y = ymax - tile.y -1,
+            tileBounds = new GLatLngBounds(
+            mercator.fromPixelToLatLng( new GPoint( (tile.x)*256, (tile.y+1)*256 ) , zoom ),
+            mercator.fromPixelToLatLng( new GPoint( (tile.x+1)*256, (tile.y)*256 ) , zoom ));
+        return (mapBounds.intersects(tileBounds))
+            ? path_to_tiles+"/"+zoom+"/"+tile.x+"/"+y+".png"
+            : "http://www.maptiler.org/img/none.png";
+    };
+
+    map.setCenter(
+        mapBounds.getCenter(),
+        map.getBoundsZoomLevel(mapBounds)
+    );
+
+    var overlay = new GTileLayerOverlay(tilelayer);
+    map.addOverlay(overlay);
+}
+
+// define it!
+_a.beforeReady(function(){
+    _a.defineComponent({
+        name: "GMap2Comp",
+        extend: "GroupComponent",
+        methods: {
+            start: function() {
+                this.render();
+            },
+            renderModel: function(model) {
+                var that = this;
+                // get the AMap2 stub
+                _a.IO.require("components/AMap2",function(){
+                    var map = new GMap2(that.sandbox[0]);
+                    map.setCenter(new GLatLng(47.0,3.0),5);
+                    map.setMapType(G_SATELLITE_MAP);
+                    map.enableScrollWheelZoom();
+                    that.map = map;
+                    // create an object to fake a HistoricalMapOverlay
+                    var mockOver = {
+                        model: model,
+                        buildWithXML: function(xml) {
+                            var path = "/archmap/media/maps/"+model.get("identifier");
+                            overlay_map(xml,map,path);
+                        }
+                    };
+                    // now use the prototype!
+                    _a.HistoricalMapOverlay.prototype.loadXML.apply(mockOver);
+                    that.wait();
+                    that.addShapesFromHash();
+                });
+            },
+            wait: function() {
+                var that = this;
+                that.polygons = [];
+                $("button.start").click(function(){
+                    var polygon = new GPolygon([
+                        that.map.getCenter(), that.map.getCenter()
+                    ]);
+                    polygon.enableEditing();
+                    that.map.addOverlay(polygon);
+                    that.polygons.push(polygon);
+                });
+                $("button.stop").click(function(){
+                    var p = that.polygons[that.polygons.length-1];
+                    var points = [];
+                    for(var i = 0, length = p.getVertexCount(); i < length; i += 1) {
+                        points.push(p.getVertex(i));
+                    }
+                    _a.log(_.map(points,function(p){
+                        return p.lat() + "," + p.lng();
+                    }).join(";"));
+                });
+            },
+            addShapesFromHash: function() {
+            	var that = this;
+            	_.each(window.location.search.slice(1).split("/"),function(number,i){
+            		console.log(">>>",number);
+            		_a.dataStore.get("place/"+number,function(place){
+            			var lls = place.get("shape").split(";").map(function(pair){
+            				var ll = pair.split(",");
+            				return new GLatLng(ll[0],ll[1]);
+            			});
+            			var polygon = new GPolygon(lls);
+            			if(i === 0) {
+            				polygon.enableEditing();
+            				$(".print").click(function(){
+            					var p = polygon;
+			                    var points = [];
+			                    for(var i = 0, length = p.getVertexCount(); i < length; i += 1) {
+			                        points.push(p.getVertex(i));
+			                    }
+			                    _a.log(_.map(points,function(p){
+			                        return p.lat() + "," + p.lng();
+			                    }).join(";"));
+            				});
+            			}
+            			that.map.addOverlay(polygon);
+            			//console.log(lls);
+            		});
+            	});
+            }
+        }
+    });
+});
+// fullscreen it!
+_a.whenReady(function(){
+    _a.LayoutManager.fullscreen(".GMap2Comp");
+});
+
+</script>
+<div class="trace">
+ <AM:GMap2Comp></AM:GMap2Comp>
+ <button class="start">Trace!</button>
+ <button class="stop">Stop!</button>
+ <button class="print">Print!</button>
+</div>

@@ -1,0 +1,263 @@
+<!-- source: image/randomtallon -->
+<script type="text/javascript">
+
+Archmap.whenReady(function(){
+
+   function layout() {
+      var height = $(window).height();
+      var width = $(window).width();
+      $("div#container").height(height).width("100%");
+      $("#frontpageimage").height(height);
+      $("#welcome").height(height-80);
+   }
+
+   $("body").css("background-image","url(/media/ui/css/chex_dark.jpg)");
+   
+    layout();
+    $(window).resize(function(){
+        layout();
+    });
+
+    $("div#container")
+    .height($(window).height()).width("100%");
+    $("#frontpageimage")
+    .height($(window).height());
+    $("#welcome")
+    .height($(window).height()-80);
+    var background = $("#frontpageimage").clone();
+    $("#frontpageimage").remove();
+    $("div#container").prepend(background);
+    $("div#header").addClass("see-through");
+    $("div#footer").addClass("see-through");
+    $("#frontpageimage").data("image",Archmap.provider().key());
+    var seen = []; // array of images we've already seen
+    var checklist = {};
+    seen.push(Archmap.provider());
+    checklist[Archmap.provider().key()] = true;
+    var current = seen.length;
+    
+    var playing = true,
+        moving,
+        moveon = function(now) {
+            clearTimeout(moving);
+            moving = setTimeout(function(){
+                $(".pager.next").trigger("click");
+            },(now) ? 0 : 13000);
+        };
+    
+    moveon(); // call the first time
+    
+    $("strong.pager").click(function(e){
+        var $this = $(this);
+        if($this.hasClass("next")) {
+            if(current == seen.length) {
+                getNewTallon(playing);
+            }
+            else {
+                current += 1;
+                update_background(seen[current-1],playing);
+            }
+        }
+        else if($this.hasClass("last")) { // moving backward
+            if(current > 1) {
+                current -= 1;
+                clearTimeout(moving);
+                update_background(seen[current-1],false);
+                if(playing === true) {
+                    $(".pause").trigger("click");
+                }
+            } // otherwise it's useless
+        }
+        else { // pause/play
+            var img = $this.find("img"),
+                alt = img.attr("alt"),
+                src = img.attr("src");
+            // now decided what to do
+            if(playing === true) { // now we pause
+                clearTimeout(moving);
+                playing = false;
+            }
+            else { // now we play
+                playing = true;
+                moveon(true);
+            }
+            img.attr("src",alt).attr("alt",src);
+        }
+    });
+   
+    Archmap.IO.require("components/ImageComponent",function(){
+        Archmap.dataStore.get("building/"+Archmap.provider().get("building_id"),function(building){
+            $("div.plan-ground").empty();
+            var plan = new Archmap.ImageComponent({
+                sandbox: $("div.plan-ground"),
+                provider: building,
+                type: "floorplan"
+            });
+        });
+    });
+   
+    var getNewTallon = function(proceed) {
+        Archmap.dataStore.getFresh("image/randomtallon",function(tallon){
+            if(checklist[tallon.key()] === undefined) {
+                seen.push(tallon);
+                checklist[tallon.key()] = true; // check it off the list
+                current = seen.length;
+                update_background(seen[current-1],proceed);
+            }
+            else {
+                getNewTallon(); // keep trying!
+            }
+        });
+    };
+
+    var buildingLink = $("#where a");
+
+   var update_background = function(image,proceed) {
+      Archmap.preloadImage(image.urlForSize("full"));
+      var url = image.urlForSize("full");
+      //Archmap.preloadImage(url);
+      var delay = 500; // wait time for image to load
+      $("#frontpageimage").animate({opacity:0.0},1000,function(){
+         $(this).css("background-image","url("+url+")");
+         setTimeout(function(){
+            $("#frontpageimage")
+               .data("image",image.key())
+               .animate({opacity:1.0},1000);
+            Archmap.dataStore.get("building/"+image.get("building_id"),function(building){
+               $("div.plan-ground").empty();
+               var plan = new Archmap.ImageComponent({
+                   sandbox: $("div.plan-ground"),
+                   provider: building,
+                   type: "floorplan"
+               });
+               buildingLink
+                  .text(building.get("name"))
+                  .attr("href","/"+building.key());
+               });
+         },delay);
+         // should we recurse on this?
+         if(proceed === true) {
+             moveon();
+         }
+      });
+   };
+   
+   // demote
+   if(Archmap.user.data.auth_level >= 5) {
+      $("body").append($("<button/>",{
+         id: "demoter",
+         css: { position:"absolute", bottom:"45px", right:"25px", "z-index": 1000000000 },
+         text: "Demote",
+         click: function() {
+            $(this).fadeOut("fast");
+            var key = $("#frontpageimage").data("image"),
+                that = this,
+                model = Archmap.dataStore.get(key); // can be synchronous
+            alert(key);
+            model.set("rating",4,function(data){
+               if(data.archmap_says.status == 200) {
+                  $(that).fadeIn("fast");
+               }
+            });
+         }
+      }));
+   }
+   
+    // show/hide the opening palette
+    var showHide = $("div#showhide"),
+        bigwelcome = $("div.welcomebox:first"),
+        hide = showHide.text(),
+        show = showHide.attr("alt"),
+        height = bigwelcome.height();
+        
+    // bind a dirrrty toggle
+    showHide.toggle(function(){
+        bigwelcome.fadeOut();
+        showHide.text(show);
+    },function(){
+        showHide.text(hide);
+        bigwelcome.fadeIn();
+    });
+    
+    // the three buttons
+    
+    var buttons = $("div#three-buttons a"),
+        /* needs params.text, params.x, params.y */
+        tip = function(params) {
+            var pop = $("<div/>",{
+                "class": "button-tip",
+                text: params.text,
+                css: {
+                    top: params.y,
+                    left: params.x
+                }
+            });
+            $("body").append(pop);
+            pop.fadeIn();
+            return pop;
+        };
+    
+    buttons.hover(function(){
+        var $this = $(this),
+            off = $this.offset();
+        $this.animate({ opacity:0.3 },150);
+        clearTimeout($this.data("time"));
+        $this.data("time",setTimeout(function(){
+            $this.data("tip",tip({
+                text: $this.attr("rel"),
+                x: off.left,
+                y: off.top + 50
+            }));
+        },200));
+    },function(){
+        var $this = $(this);
+        clearTimeout($this.data("time"));
+        $this.animate({ opacity:1.0 },150);
+        $(".button-tip").remove();
+    });
+    
+    //Archmap.dataStore.get("collection/2685",function(collection){
+    //  console.log(collection);
+    //});
+   
+});
+</script>
+<div id="frontpageimage" style="background-position:center center; background-repeat:no-repeat; background-image:url({ $model->url('full') })">
+</div>
+<div id="welcome">
+ <div class="padding">
+  <div id="showhide" alt="Show">Hide</div>
+  <div class="welcomebox">
+   <h3><img src="/media/ui/welcome.png" height=74 width=274 alt="Welcome to Mapping Gothic France"/></h3>
+   <p class="intro" style="font-size:13px;">With a database of images, texts, charts and historical maps, <strong>Mapping Gothic France</strong> invites you to explore the parallel stories of Gothic architecture and the formation of France in the 12th and 13th centuries, considered in three dimensions:</p>
+   <div id="three-buttons" class="clear">
+    <div class="button space">
+     <div class="padding">
+      <a href="/map" rel="Buildings displayed in their geo-political space &mdash; Great Gothic structures apportioned on an interactive map..."><span>Space</span></a>
+     </div>
+    </div>
+    <div class="button time">
+     <div class="padding">
+      <a href="/time" rel="Buildings arranged by approximate construction dates &mdash; historical maps detail changing medieval political boundaries..."><span>Time</span></a>
+     </div>
+    </div>
+    <div class="button narrative">
+     <div class="padding">
+      <a href="/stories-and-essays" rel="Buildings represented in words &mdash; follow a narrative for each building, explore the thoughts of the principal scholars, or survey the recurring stories of how Gothic became Gothic..."><span>Narrative</span></a>
+     </div>
+    </div>
+   </div>
+   <p style="font-size:11px;color:#777;margin-bottom:0px;"><em>The project is currently in beta.</em> Firefox, Safari, and Chrome browsers work best for now. Visit the <a href="/feedback">feedback</a> page to report problems or offer suggestions.</p>
+   <!--<a id="continue" href="/map"><span>Continue to the map</span></a>-->
+  </div>
+  <div class="welcomebox imageplayer">
+    <div class="plan-ground"></div>
+    <div id="where">
+     <a href="/building/{ $model->get('building_id') }">{ $model->get('building_name') }</a>
+    </div>
+    <strong class="pager last"><img src="/media/ui/slideshow/prev.png"/></strong>
+    <strong class="pager pause"><img src="/media/ui/slideshow/pause.png" alt="/media/ui/slideshow/play.png"/></strong>
+    <strong class="pager next"><img src="/media/ui/slideshow/next.png"/></strong>
+  </div>
+ </div>
+</div>

@@ -1,0 +1,39 @@
+div.KeywordComponent {
+   padding:15px;
+}
+
+div.KeywordComponent h6 {
+   margin-bottom:5px;
+   font-size:14px;
+   color:#777;
+}
+div.KeywordComponent ul {
+   margin-bottom:25px;
+}
+div.KeywordComponent li {
+   font-size:12px; color:#333;
+   display:block;
+   padding:3px;
+}
+div.KeywordComponent li a {
+   padding:3px 0px;
+   position:relative;
+}
+
+div.KeywordComponent div.choices {
+   border-top:1px solid #white;
+   margin-top:25px;
+}
+
+div.KeywordComponent div.choices ul {
+   display:block;
+   margin-top:10px;
+}
+
+div.KeywordComponent input.add {
+   display:block;
+   margin-top:15px;
+   padding:5px;
+   width:75%;
+   color:#555;
+}

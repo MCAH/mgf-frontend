@@ -1,0 +1,78 @@
+<div class="overflap clear">
+ <div class="overflap-inner clear">
+  <div id="unique">
+   <h1><span class="pretty editable clickable">{ $model->get("name") }</span></h1>
+   <ul id="options" class="clear">
+    <li><a href="/building/{$model->get('id')}/images/page/1">Images</a></li>
+    <li><a href="/building/{$model->get('id')}/nodes">360&deg; Panoramas</a></li>
+    <li><a href="/building/{$model->get('id')}/stereos">Stereoscopic Images</a></li>
+   </ul>
+  </div>
+  <AM:SlideCarousel></AM:SlideCarousel>
+  <div style="padding-left:10px;">
+   <div class="enlarged-plan"></div>
+  </div>
+  <div id="monograph">
+   <div id="monograph-inner">
+    <?php if($user->get('isUser') > 4): ?>
+    <AM:ImageDocket></AM:ImageDocket>
+    <?php endif ?>
+    <h4>Plan</h4>
+    <div class="pgraph editable hoverable">{$model->get('plan')}</div>
+    <h4>Elevation</h4>
+    <div class="pgraph editable hoverable">{$model->get('elevation')}</div>
+    <h4>History</h4>
+    <div class="pgraph editable hoverable">{$model->get('history')}</div>
+    <h4>Chronology</h4>
+    <div class="pgraph editable hoverable">{$model->get('chronology')}</div>
+    <h4>Sculptural Program</h4>
+    <div class="pgraph editable hoverable">{$model->get('sculpture')}</div>
+    <h4>Significance</h4>
+    <div class="pgraph editable hoverable">{$model->get('significance')}</div>
+    <h4>Bibliography</h4>
+    <div class="pgraph editable hoverable">{$model->get('bibliography')}</div>
+   </div>
+  </div> <!-- end of the monograph -->
+  <div id="always_on">
+   <?php if($user->get('isUser') > 4): ?>
+   <div id="SlideshowController" class="component"></div>
+   <? endif ?>
+   <div class="name-card-holder" style="margin-bottom:5px">
+    <div class="name-card">The Floorplan: Images &amp; Panoramas</div>
+   </div>
+   <AM:PlanComponentM options="bigger:.enlarged-plan"></AM:PlanComponentM>
+   <AM:SectionComponent></AM:SectionComponent>
+   <div class="name-card-holder" style="margin-bottom:5px">
+     <div class="name-card">Parametric Section</div>
+   </div>
+   <AM:ParametricComponent style='height:200px'></AM:ParametricComponent>
+   <div class="name-card-holder" style="margin-bottom:5px">
+     <div class="name-card">Vital Statistics</div>
+   </div>
+   <div class="vitals">
+    <ul>
+     <li><span>Begun around</span> <strong class="editable clickable">{$model->get('beg_year')}</strong></li>
+     <li><span>Destroyed in</span> <strong class="editable clickable">{$model->get('end_year')}</strong></li>
+     <li><span>Latitude</span> <strong>{$model->get('lat')}</strong></li>
+     <li><span>Longitude</span> <strong>{$model->get('lng')}</strong></li>
+     <li><span>Parent Town</span> <a href="/place/{$model->town_id}">{$model->get('town_name')}</a></li>
+    </ul>
+   </div>
+   <!--<AM:RelationsComponent></AM:RelationsComponent>-->
+  </div>
+ </div>
+</div>
+<div class="underflap">
+ <div class="underflap-inner">
+  <AM:MapComponent2
+    loaddefer="500" rel="collection/1"
+    style="height:300px;margin-bottom:25px;">
+  </AM:MapComponent2>
+  <AM:PositionEditor></AM:PositionEditor>
+  <AM:UploadComponent></AM:UploadComponent>
+  <div class="name-card-holder" style="margin-bottom:5px">
+   <div class="name-card">All the Buildings</div>
+  </div>
+  <AM:ListComponent class="simple" loaddefer="2000" rel="collection/1"></AM:ListComponent>
+ </div>
+</div>

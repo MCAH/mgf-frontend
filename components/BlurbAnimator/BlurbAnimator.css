@@ -1,0 +1,71 @@
+.darkness {
+   background:#aaa;
+   background-color:rgba(25,25,25,0.6);
+   background-image:url(/media/ui/sinclair.png);
+   display:none;
+   position:absolute;
+   top:0px; left:0px; width:100%;
+   z-index:1000000000000000000000;
+}
+.blockout {
+   position:absolute;
+   top:100px;
+   left:200px;
+   width:700px;
+   height:500px;
+   background-color:rgba(255,255,255,0.8);
+   background-image:url(/media/ui/hohenstaufen.png);
+   background-position:-35px -85px;
+   border:5px solid #eee;
+   -webkit-box-shadow:0px 1px 25px rgba(0,0,0,0.4);
+   overflow:hidden;
+}
+.blockout strong.begin {
+   color:royalblue; font-size:14px;
+   display:block;
+   margin-top:15px;
+   cursor:pointer;
+   font-size:20px;
+}
+
+.blockout div.holder {
+   padding:25px;
+   width:35%;
+   font-size:12px;
+   line-height:175%;
+   color:#555;
+   background:white;
+   background:rgba(255,255,255,0.8);
+   position:absolute;
+   top:0px; right:15%;
+   height:500px;
+   -webkit-box-shadow:0px 1px 5px rgba(0,0,0,0.3);
+   border:5px solid #ddd;
+   border-top:none;
+}
+.blockout div.holder h3 {
+   font-size:24px;
+}
+
+.BlurbAnimator {
+   background:url(/media/ui/sinclair.png);
+   overflow:hidden;
+}
+.BlurbAnimator .blurb {
+   background:white;
+}
+
+.BlurbAnimator div.buttons {
+   padding:20px;
+   margin-bottom:20px;
+   background-image:-webkit-gradient(linear, 0% 0%, 0% 15%, from(#ECECEC), to(whitesmoke));
+   background-image:-moz-linear-gradient(top,#ECECEC,whitesmoke);
+   -webkit-box-shadow:0px 1px 5px rgba(0,0,0,0.3);
+}
+
+.BlurbAnimator div.padding {
+   padding:0px 20px 20px 20px; font-size:13px;
+   line-height:175%;
+   color:#555;
+   border-bottom:1px solid #ddd;
+}

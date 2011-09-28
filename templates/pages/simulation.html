@@ -1,0 +1,26 @@
+<AM:source key="nil"/>
+<script type="text/javascript" src="http://webplayer.unity3d.com/download_webplayer-3.x/3.0/uo/UnityObject.js"></script>
+<script type="text/javascript">
+
+function GetUnity() {
+if (typeof unityObject != "undefined") {
+	return unityObject.getObjectById("unityPlayer");
+}
+return null;
+}
+if (typeof unityObject != "undefined") {
+    var $w = $(window);
+    unityObject.embedUnity("unityPlayer", "/media/unity/ArchDemo/ArchDemo.unity3d", $w.width()-4, $w.height() - 150);
+}
+
+</script>
+<p style="display:none;font-size:12px;line-height:175%;padding:25px;width:45%">This interactive model uses a physics simulation to explore the structural integrity of a stone arch by allowing the user to vary its dimensional parameters. To adjust the arch parameters, click and drag on the three sliders below. Making the arch or its supporting piers too narrow will cause the arch to collapse. If the arch is unstable, what is the effect of the third slider, which increases the radius of each half of the arch?</p>
+<div class="content" style="margin-top:2px;margin-left:2px">
+	<div id="unityPlayer">
+		<div class="missing">
+			<a href="http://unity3d.com/webplayer/" title="Unity Web Player. Install now!">
+				<img alt="Unity Web Player. Install now!" src="http://webplayer.unity3d.com/installation/getunity.png" width="193" height="63" />
+			</a>
+		</div>
+	</div>
+</div>

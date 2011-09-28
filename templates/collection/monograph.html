@@ -1,0 +1,31 @@
+<div class="overflap clear" style="width:70%">
+ <div class="overflap-inner clear">
+  <div id="unique">
+   <div id="unique-inner">
+    <h1><span class="pretty editable clickable">{ $model->get("name") }</span><small>Collection</small></h1>
+   </div>
+  </div>
+   <div id="monograph" style="width:48%">
+    <div id="monograph-inner">
+     <h4>Description</h4>
+     <p class="editable hoverable">{ $model->get("descript") }</p>
+    </div>
+   </div>
+   <div id="always_on" style="width:50%">
+   <?php if($user->get("isUser") >= 5): ?>
+   	<div class="vitals">
+     <ul>
+      <li><span>permission level necessary to edit this collection</span> <strong class="editable clickable">{$model->get('isUser')}</strong></li>
+     </ul>
+   	</div>
+   	<?php endif ?>
+   	<AM:ListComponent></AM:ListComponent>
+   </div>
+ </div>
+</div>
+<div class="underflap" style="width:30%">
+ <div class="underflap-inner">
+  <AM:MapComponent2 style="height:500px"></AM:MapComponent>
+  <!--<div id="TimelineComponent" class="component" rel="this"></div>-->
+ </div>
+</div>

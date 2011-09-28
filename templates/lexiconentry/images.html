@@ -1,0 +1,18 @@
+<div id="unique">
+ <div id="unique-inner">
+  <h1>{ $model->name }</h1>
+ </div>
+</div>
+<div id="fullwidth">
+ <div id="fullwidth-inner">
+  <ul class="tray clear" rel="images">
+   <?php foreach($model->images as $key=>$image): ?>
+    <li>
+     <a href="/image/{ $image->id }" class="biggable">
+      <img src="{ $image->thumbnail }"/>
+     </a>
+    </li>
+   <?php endforeach ?>
+  </ul>
+ </div>
+</div>
